@@ -17,20 +17,19 @@ pipeline {
 		string(name: 'BRANCH_NAME', defaultValue: '', description: '')
 		string(name: 'FOLDER_PATH', defaultValue: '', description: '')
 		string(name: 'DOCKER_BINARY_PATH', defaultValue: '', description: '')
-		string(name: 'SNYK_PSW', defaultValue: '', description: '')
-		string(name: 'TOPIC', defaultValue: '', description: '')
+		string(name: 'CONTAINER_ID', defaultValue: '', description: '')
+		string(name: 'TARGET_URL', defaultValue: '', description: '')
+		string(name: 'CONTAINER_ID', defaultValue: '', description: '')
 		string(name: 'TAG', defaultValue: '', description: '')
 	}
     environment {
         SNYK = credentials('snyk_laurent-douchy')
     }
 	stages {
-		stage('Setup Repository') {
+		stage('Setup Containers') {
 			steps {
 				script {
-					dir("${params.FOLDER_PATH}") {
-						sh "rm -rf ${params.PROJECT_NAME}"
-						sh "git clone ${params.CLONE_URL}"
+						sh "docker run -u zap -p 2375:2375 -d owasp/zap2docker-weekly zap.sh -daemon -port 2375 -host 127.0.0.1 -config api.disablekey=true -config scanner.attackOnStart=true -config view.mode=attack -config connection.dnsTtlSuccessfulQueries=-1 -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true ${params.CONTAINER_ID}"
 					}
 					if (params.TAG == '') {
 						stage(params.PROJECT_NAME + ' - Branch : master') {
