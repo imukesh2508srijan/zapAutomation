@@ -6,6 +6,7 @@ pipeline {
             steps {
                 echo 'Stage 1'
                 script {
+                    echo 'Stage 1'
                     }
                 }
             }
@@ -14,6 +15,7 @@ pipeline {
             steps {
                 echo 'Stage 2'
                 script {
+                    echo 'Stage 2'
                     }
                 }
             }
@@ -22,6 +24,7 @@ pipeline {
             steps {
                 echo 'Stage 3'
                 script {
+                    echo 'Stage 3'
                     }
                 }
             }
@@ -30,6 +33,7 @@ pipeline {
             steps {
                 echo 'Stage 4'
                 script {
+                    echo 'Stage 4'
                     }
                 }
             }
@@ -38,6 +42,7 @@ pipeline {
             steps {
                 echo 'Stage 5'
                 script {
+                    echo 'Stage 5'
                     }
                 }
             }
