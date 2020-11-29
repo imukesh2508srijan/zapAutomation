@@ -34,7 +34,7 @@ pipeline {
     stage("INFORMATION") {
         steps {
             // script {
-            //    echo "Pipeline version: docker-ci.groovy-${SCRIPT_VERSION}"
+                echo "Pipeline version: docker-ci.groovy-${SCRIPT_VERSION}"
             //     }
             // }
             
@@ -42,6 +42,7 @@ pipeline {
 
     stage('Setup Github Repository') {
         steps {
+            echo "Pipeline version: docker-ci.groovy-${SCRIPT_VERSION}"
             // script {
             //     // dir("${FOLDER_PATH}") {
             //     // sh "rm -rf ${PROJECT_NAME} && \
