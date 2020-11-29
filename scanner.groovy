@@ -12,7 +12,7 @@ currentDate = dateFormat.format(new Date())
 
 parameters {
     string(name: 'TARGET_URL', defaultValue: 'https://natixis-stage.oncorps.io', description: 'This parameter is to use the targeted website for zap scanning.')
-    string(name: 'FOLDER_PATH', defaultValue: '/var/lib/jenkins/oncorps_repositories', description: 'This parameter is to use the targeted website for zap scanning.')
+    string(name: 'FOLDER_PATH', defaultValue: '/var/lib/jenkins', description: 'This parameter is to use the targeted website for zap scanning.')
     string(name: 'PROJECT_NAME', defaultValue: 'Natixis', description: 'This parameter is to use the targeted website for zap scanning.')	
     string(name: 'GIT_REPO', defaultValue: 'https://github.com/imukesh2508srijan/ui-natixis.git', description: 'This parameter is to use the targeted website for zap scanning.')	
 }
@@ -43,17 +43,17 @@ node {
         stage("INFORMATION") {
             echo "Pipeline version: docker-ci.groovy-${SCRIPT_VERSION}"
         }
-        // This stage is to cleanup the workspace.
-        // stage("PreBuild") {
-        //     try {
-        //         sh "rm -rf $WORKSPACE/*"
-        //     }catch (error) {
-        //         // Inform of the error
-        //         echo "Unable to clean the workspace."
-        //         throw error
-        //         currentBuild.result = "FAILURE"
-        //     }
-        // }
+        This stage is to cleanup the workspace.
+        stage("PreBuild") {
+            try {
+                sh "rm -rf $WORKSPACE/*"
+            }catch (error) {
+                // Inform of the error
+                echo "Unable to clean the workspace."
+                throw error
+                currentBuild.result = "FAILURE"
+            }
+        }
 
         stage('Setup Github Repository') {
             steps {
