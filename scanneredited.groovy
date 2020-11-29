@@ -32,7 +32,12 @@ pipeline {
   
   stages {
     stage("INFORMATION") {
-            echo "Pipeline version: docker-ci.groovy-${SCRIPT_VERSION}"
+        steps {
+            script {
+               echo "Pipeline version: docker-ci.groovy-${SCRIPT_VERSION}"
+                }
+            }
+            
         }
 
     stage('Setup Github Repository') {
