@@ -26,14 +26,7 @@ options {
 
         stage('PreBuild') {
             steps {
-                try {
                     sh "rm -rf $WORKSPACE/*"
-                }   catch (error) {
-                    // Inform of the error
-                    echo "Unable to clean the workspace."
-                    throw error
-                    currentBuild.result = "FAILURE"
-                }
             }
         }
 
@@ -52,7 +45,6 @@ options {
         stage('Setup Repository') {
             steps {
                 echo "Scanning Target: ${TARGET_URL}"
-                try {   
                     //The port is required in order to execute zap and the same port can't be used if it is still in use.
                     //In order to achive the parallel exeuction, generating random port number between 2000 to 5000.
                     port = sh (
@@ -74,16 +66,10 @@ options {
                             -config connection.dnsTtlSuccessfulQueries=-1 \
                             -config api.addrs.addr.name=.* \
                             -config api.addrs.addr.regex=true"
-			}   catch (error) {
-                echo "Unable to run the ZAP container."
-                throw error
-                currentBuild.result = "FAILURE"
-                }
 		    }
         }
 
         stage('Initiate ZAP and Open Targeted URL') {
-            try {
                 //can be taken from the docker run --rm -d : Line51
 				containerID = sh (
                     script: 'docker ps -l -q',
@@ -94,12 +80,7 @@ options {
 				sh "docker exec ${containerID} zap-cli -p ${port} status -t 120"
                 sh "docker exec ${containerID} zap-cli context import ${containerID}:/zap/zap.context"
                 sh "docker exec ${containerID} zap-cli -p ${port} open-url ${TARGET_URL}"
-			}catch (error) {
-                echo "ZAP is not initiated properly OR Unable to open the Targeted URL."
-                throw error
-                currentBuild.result = "FAILURE"
-            }
-		}
 
+		    }
         }
     }
