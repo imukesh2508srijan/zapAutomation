@@ -29,17 +29,17 @@ options {
 }
 
 //Email notification method.
-def notifyViaEmail(String buildStatus = 'SUCCESS', String MESSAGE = 'Report') {
-    def decodedJobName = env.JOB_NAME.replaceAll("%2F", "/")
+// def notifyViaEmail(String buildStatus = 'SUCCESS', String MESSAGE = 'Report') {
+//     def decodedJobName = env.JOB_NAME.replaceAll("%2F", "/")
 
-    emailext (
-        subject: "${decodedJobName} - ${MESSAGE}",
-        body: '''${SCRIPT, template="groovy-html.template"}''',
-        to: "mukesh.sharma@srijan.net",
-        replyTo: 'mukesh.sharma@srijan.net',
-        attachLog: true
-    )
-}
+//     emailext (
+//         subject: "${decodedJobName} - ${MESSAGE}",
+//         body: '''${SCRIPT, template="groovy-html.template"}''',
+//         to: "mukesh.sharma@srijan.net",
+//         replyTo: 'mukesh.sharma@srijan.net',
+//         attachLog: true
+//     )
+// }
 node {
     try{
         stage("INFORMATION") {
