@@ -38,10 +38,10 @@ pipeline {
     stage('Setup Github Repository') {
         steps {
             script {
-                dir("${FOLDER_PATH}") {
-                sh "rm -rf ${PROJECT_NAME} && \
-                git clone ${GIT_REPO}"
-                echo "${GIT_REPO}"
+                // dir("${FOLDER_PATH}") {
+                // sh "rm -rf ${PROJECT_NAME} && \
+                // git clone ${GIT_REPO}"
+                // echo "${GIT_REPO}"
                 }
             }
         }
