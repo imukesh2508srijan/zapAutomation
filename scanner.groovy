@@ -45,12 +45,12 @@ options {
 //         attachLog: true
 //     )
 // }
-stages {
+node {
     try{
         stage("INFORMATION") {
             echo "Pipeline version: docker-ci.groovy-${SCRIPT_VERSION}"
         }
-        This stage is to cleanup the workspace.
+        //This stage is to cleanup the workspace.
         stage("PreBuild") {
             try {
                 sh "rm -rf $WORKSPACE/*"
