@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat
 def dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm")
 currentDate = dateFormat.format(new Date())
 
+pipeline {
+
 parameters {
     string(name: 'TARGET_URL', defaultValue: 'https://natixis-stage.oncorps.io', description: 'This parameter is to use the targeted website for zap scanning.')
     string(name: 'FOLDER_PATH', defaultValue: '/var/lib/jenkins', description: 'This parameter is to use the targeted website for zap scanning.')
@@ -176,4 +178,5 @@ node {
         sh "docker stop ${containerID}"
         notifyViaEmail(currentBuild.result, 'Report')
     }
+}
 }
