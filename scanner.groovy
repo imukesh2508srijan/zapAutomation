@@ -11,6 +11,11 @@ def dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm")
 currentDate = dateFormat.format(new Date())
 
 pipeline {
+    agent {
+		node {
+			label 'master'
+		}
+	}
 
 parameters {
     string(name: 'TARGET_URL', defaultValue: 'https://natixis-stage.oncorps.io', description: 'This parameter is to use the targeted website for zap scanning.')
@@ -40,7 +45,7 @@ options {
 //         attachLog: true
 //     )
 // }
-node {
+stages {
     try{
         stage("INFORMATION") {
             echo "Pipeline version: docker-ci.groovy-${SCRIPT_VERSION}"
