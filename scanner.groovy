@@ -54,7 +54,7 @@ node {
         stage("PreBuild") {
             try {
                 sh "rm -rf $WORKSPACE/*"
-            }catch (error) {
+            } catch (error) {
                 // Inform of the error
                 echo "Unable to clean the workspace."
                 throw error
